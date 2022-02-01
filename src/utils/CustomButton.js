@@ -1,37 +1,43 @@
-import React, {useState} from 'react';
-import {Image, ImageBackground, Modal, Pressable, StyleSheet, Text, View,} from 'react-native';
+import React from 'react';
+import {
+    Pressable,
+    Text,
+    StyleSheet,
+} from 'react-native';
 
-const MyButton = ({onButtonClick,text, ...props}) => {
+const CustomButton = (props) => {
     return (
-            <Pressable
-                android_ripple={{color: "#00f"}}
-                style={({pressed}) => [
-                    styles.btn,
-                    {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
-                    {...props.style}
-
-                ]}
-                onPress={onButtonClick}>
-                <Text style={styles.text}>{text} </Text>
-            </Pressable>
-
-    );
-};
+        <Pressable
+            onPress={props.onPressFunction}
+            hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
+            android_ripple={{ color: '#00000050' }}
+            style={({ pressed }) => [
+                { backgroundColor: pressed ? '#dddddd' : props.color },
+                styles.button,
+                { ...props.style }
+            ]}
+        >
+            <Text style={styles.text}>
+                {props.title}
+            </Text>
+        </Pressable>
+    )
+}
 
 const styles = StyleSheet.create({
-
-    btn: {
-        backgroundColor: 'rgb(39,206,137)',
-        height: 70,
-        width: 160,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 15,
-    },
     text: {
-        color: 'white',
-        fontSize: 35,
+        color: '#ffffff',
+        fontSize: 20,
+        margin: 10,
+        textAlign: 'center',
     },
-});
+    button: {
+        width: 150,
+        height: 50,
+        alignItems: 'center',
+        borderRadius: 5,
+        margin: 10,
+    },
+})
 
-export default MyButton;
+export default CustomButton;
