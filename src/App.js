@@ -1,69 +1,45 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, Modal, Pressable, StyleSheet, Text, View,} from 'react-native';
-import MyButton from "./CustomButton";
-import Header from "./Header";
+import MyButton from "./utils/CustomButton";
+import Header from "./examples/Header";
 import {createStackNavigator} from "@react-navigation/stack";
 import {NavigationContainer} from "@react-navigation/native";
+import {ScreenB} from "./examples/ScreenB";
+import {Login} from "./screens/Login";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {createDrawerNavigator} from "@react-navigation/drawer";
+import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
+import Home from "./screens/Home";
 
-
-
+//const Stack = createStackNavigator()
+// навигация через топ - const Top = createMaterialTopTabNavigator()
+// навигая через боковое меню - const Drawer = createDrawerNavigator()
+//const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
+
 const App = () => {
     const [isVisible, setVisible] = useState(true);
-
-
-
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName ='Login'>
                 <Stack.Screen
-                    name={'Screen_A'}
-                    component={ScreenA}
+                    name={'Login'}
+                    component={Login}
+                    options={{
+                        headerShown:false
+                    }}
                 />
                 <Stack.Screen
-                    name={'Screen_B'}
-                    component={ScreenB}
+                    name={'Home'}
+                    component={Home}
                 />
+
             </Stack.Navigator>
         </NavigationContainer>
     );
 };
-const ScreenA = ({navigation}) => {
-    const onButtonClick = () => {
-        navigation.navigate('Screen_B')
-    };
-    return (
-        <View style={styles.container}>
 
-            <Pressable
-                android_ripple={{color: "#00f"}}
-                style={({pressed}) => [
-                    {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
-                ]}
-                onPress={onButtonClick}>
-                <Text style={styles.text}> go to screen b</Text>
-            </Pressable>
-        </View>
-    );
-};
-const ScreenB = ({navigation}) => {
-    const onButtonClick = () => {
-        navigation.navigate('Screen_A')
-    };
-    return (
-        <View style={styles.container}>
-
-            <Pressable
-                android_ripple={{color: "#00f"}}
-                style={({pressed}) => [
-                    {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
-                ]}
-                onPress={onButtonClick}>
-                <Text style={styles.text}> go to screen a</Text>
-            </Pressable>
-        </View>
-    );
-};
 const styles = StyleSheet.create({
     container: {
         flex: 1,
